@@ -19,12 +19,21 @@ class baseDeDatos  {
     }
     // ! Traer Productos
     async getProductos(objProduct){
-        const data = await fs.promises.readFile('data/productos.json','utf-8')
+        try{const data = await fs.promises.readFile('data/productos.json','utf-8')
         const productos = JSON.parse(data)
-        
+        return productos
+    } catch(err){return []}
     }
     // ! Traer Producto por ID Random para /randomProduct
-    
+    async getProductoId(id){
+        try{
+            const data = await fs.promises.readFile("data/productos.json")
+            const productos = JSON.parse(data)
+            const producto = productos.find((producto)=>producto.id == id)
+            console.log(producto)
+            return producto
+        }catch(err){return "Producto no encontrado"}
+    }
 }
 const db = new baseDeDatos('data')
     //!Agregando productos al json
@@ -40,16 +49,19 @@ const app = express();
 
 //! traer array de productos
 
-app.get('/productos',()=>{
-
+app.get('/productos', async (req,res)=>{
+    const data = await db.getProductos()
+    return res.send(data)
 })
 
 //! traer producto random
 
-app.get('/productoRadom',()=>{
-
+app.get('/productoRadom', async(req,res)=>{
+    const data = await db.getProductoId(Math.floor(Math.random()*(5-1)+1))
+    return res.send(data)
 })
 
-app.listen(8080,()=>{
-    
+const appCon = app.listen(8080,()=>{
+    console.log(`El servidor esta iniciado en el puerto: ${appCon.address().port}`)
 })
+
