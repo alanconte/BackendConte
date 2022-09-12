@@ -1,1 +1,1 @@
-[{"name":"Pizza","price":1000,"id":1,"stock":[]},{"name":"Empanadas","price":200,"id":2,"stock":[]},{"name":"Gaseosa","price":400,"id":3,"stock":[]},{"name":"Cerveza","price":350,"id":4,"stock":[]}]
+[{"name":"Pizza","price":1000,"id":1,"stock":[]},{"name":"Empanadas","price":200,"id":2,"stock":[]},{"name":"Gaseosa","price":400,"id":3,"stock":[]},{"name":"Cerveza","price":350,"id":4,"stock":[]},{"name":"Milanesa","price":1000,"id":5,"stock":[]},{"name":"Agua saborizada","price":300,"id":6,"stock":[]}]

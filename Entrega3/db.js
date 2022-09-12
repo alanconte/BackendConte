@@ -16,6 +16,7 @@ class baseDeDatos  {
         productos.push(objProduct)
         const productoGuardar = JSON.stringify(productos)
         await fs.promises.writeFile('data/productos.json', productoGuardar)
+        return productos
     }
     // ! Traer Productos
     async getProductos(objProduct){
@@ -26,13 +27,14 @@ class baseDeDatos  {
     }
     // ! Traer Producto por ID Random para /randomProduct
     async getProductoId(id){
-        try{
+    
             const data = await fs.promises.readFile("data/productos.json")
             const productos = JSON.parse(data)
             const producto = productos.find((producto)=>producto.id == id)
             console.log(producto)
-            return producto
-        }catch(err){return "Producto no encontrado"}
+            if (producto){return producto}
+            else{throw new Error("producto no encontrado")}
+       
     }
 }
 const db = new baseDeDatos('data')
